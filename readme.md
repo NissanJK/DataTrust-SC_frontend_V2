@@ -37,13 +37,13 @@ cd DataTrust-SC_frontend_V2
 
 ## Environment Variables
 
-Create a `.env` file in the frontend project root:
+Create a `.env` file in the frontend project root and define the backend API base URL:
 
 ```env
-REACT_APP_API_URL=http://localhost:5000/api
+REACT_APP_API_URL=your-backend-api-base-url
 ```
 
-For production, set `REACT_APP_API_URL` to the deployed backend API base URL, including `/api`.
+Use environment-specific values for local development, staging, and production. Do not commit real deployment URLs, API keys, tokens, or private service details.
 
 ## Installation
 
@@ -102,32 +102,11 @@ frontend/
 
 ## Backend Integration
 
-The Axios client is configured in `src/api/api.js`:
-
-```js
-const API = axios.create({
-  baseURL: process.env.REACT_APP_API_URL || "http://localhost:5000/api"
-});
-```
-
-Expected backend endpoints include:
-
-- `GET /api/dataset`
-- `POST /api/dataset/upload`
-- `POST /api/dataset/import`
-- `GET /api/dataset/export`
-- `POST /api/access/request`
-- `GET /api/access/logs`
-- `GET /api/disaster/alerts`
-- `GET /api/disaster/alerts/:sector`
-- `GET /api/disaster/sectors/stats`
-- `GET /api/disaster/thresholds`
-- `POST /api/system/reset`
-- `GET /api/system/verify-chain`
+The frontend communicates with the backend through the configured `REACT_APP_API_URL` value. Keep endpoint-level documentation, deployment URLs, and credentials outside this public README.
 
 ## Usage Flow
 
-1. Start the backend API and confirm `GET /health` returns an OK response.
+1. Start the backend API and confirm it is healthy.
 2. Start the frontend with `npm start`.
 3. Upload data manually or import a CSV dataset.
 4. Use the data requester panel to test role and attribute policies.
@@ -153,6 +132,7 @@ Expected backend endpoints include:
 
 - Rebuild after changing `REACT_APP_API_URL`; Create React App embeds environment variables at build time.
 - Confirm the deployed backend CORS allowlist includes the deployed frontend URL.
+- Confirm sensitive URLs and credentials are configured in the deployment provider, not committed to the repository.
 
 ## Author
 
